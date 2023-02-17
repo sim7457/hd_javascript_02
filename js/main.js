@@ -162,6 +162,215 @@ const MS_SLIDE_OPTION = {
 }
 const MS_SLIDE = new Swiper('.Ms_slide', MS_SLIDE_OPTION);
 
+//바닐라 자바스크립트로 youtube 쓰기...
+
+let player;
+const Y_OPTION = {
+    // height: '100%',
+    // width: '100%',
+    videoId: 'raw3Nu0_mBQ',
+}
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('main_movie01', Y_OPTION);
+}
+
+// pp.onclick = function () {
+//     console.log('btn')
+// }
+
+// const Y_PLAY_BTN = document.querySelector('#pp');
+// const Y_PAUSE_BTN = document.querySelector('#pp2');
+// const Y_PLAY_VIDEO = () => {
+//     console.log('btn');
+//     player.playVideo();
+// }
+// const Y_PAUSE_VIDEO = () => {
+//     console.log('btn');
+//     player.pauseVideo();
+// }
+// Y_PLAY_BTN.addEventListener('click', Y_PLAY_VIDEO);
+// Y_PAUSE_BTN.addEventListener('click', Y_PAUSE_VIDEO);
+
+
+const V_BTN = document.querySelector('.video_btn');
+
+let SW = true;
+const V_SWITCH = e => {
+    const tg = e.target;
+    tg.classList.toggle('on');
+    SW ? player.playVideo() : player.pauseVideo();
+    SW = !SW;
+}
+
+V_BTN.addEventListener('click', V_SWITCH);
+
+
+
+
+// let SW : 전역변수, 전역변수를 지역변수로 가둬서 쓰는 방법이 없을까??? 클로져...;
+
+// clouser 클로져로 함수 스코프에 변수 뮦어놓기01 (.. )
+// const VV = () => {
+//     let SW = true;
+//     const VV_inner = () => {
+//         console.log(SW);
+//         SW = !SW;
+//     }
+//     return VV_inner;
+// }
+//const DDD = VV();
+//ddd.addEventListener('click', DDD);
+//console.log(SW, SW2);
+
+
+
+// clouser 클로져로 함수 스코프에 변수 뮦어놓기02 (.. )
+// const TB = (function () {
+//     let SW = true;
+//     const toggle = e => {
+//         const target = e.target;
+//         target.classList.toggle('on');
+//         SW ? player.playVideo() : player.pauseVideo();
+//         SW = !SW;
+//     }
+//     return toggle;
+// })();
+
+
+// V_BTN.addEventListener('click', TB);
+
+
+// react 예시 (.. )
+// const [on, setOn] = useState(true);
+// <button onClick={()=> setOn(!on)} className={on ? 'on' : ''}></button>
+
+
+
+const MOVIE_UL = document.querySelector('#mainMovie .link');
+const UL_CSS = `
+    display: flex; 
+    gap: 50px; 
+    width:600px; 
+    margin: 60px auto 0 auto;
+    text-align: center;
+`
+MOVIE_UL.style.cssText = UL_CSS;
+
+//[...MOVIE_UL.children][0].classList.add('on');
+
+
+
+const MOVIE_LINK = [
+    { title: "IT Technology", desc: "IT 기술이 창조하는 승강기 스마트 시스템" },
+    { title: "Green Technology", desc: "지구환경을 생각하는 녹색기술" },
+];
+
+// MOVIE_UL.innerHTML = `<li>
+// <strong>${MOVIE_LINK[0].title}</strong>
+// <span>${MOVIE_LINK[0].desc}</span>
+// </li>`;
+
+// for (let i = 0; i < MOVIE_LINK.length; i++) {
+//     MOVIE_UL.innerHTML += `<li>
+//         <strong>${MOVIE_LINK[i].title}</strong>
+//         <span>${MOVIE_LINK[i].desc}</span>
+//         </li>`;
+// }
+
+
+for (const it of MOVIE_LINK) {
+    MOVIE_UL.innerHTML += `<li>
+            <strong>${it.title}</strong>
+            <span>${it.desc}</span>
+            </li>`;
+}
+
+const STRONG = document.querySelectorAll('#mainMovie .link strong');
+
+for (const it of STRONG) {
+    it.style.display = 'block'
+}
+
+console.log([...MOVIE_UL.children][0]);
+[...MOVIE_UL.children][0].classList.add('on');
+
+const MOVIE_UL_TOGGLE = e => {
+    //전체 li에서 class를 떼고, 클릭한 거에 class를 붙이기...
+    //click 한 거의 번호 가져오기;
+    let idx = [...MOVIE_UL.children].indexOf(e.target.parentElement);
+    console.log(idx);
+
+    for (const it of [...MOVIE_UL.children]) {
+        it.classList.remove('on')
+    };
+    [...MOVIE_UL.children][idx].classList.add('on');
+
+    //e.target.parentElement.classList.add('on');
+}
+
+MOVIE_UL.addEventListener('click', MOVIE_UL_TOGGLE);
+
+// footer .t_right li a click 일단 a 자체의 새로고침을 막고
+// 전체 li에서는 on을 뗀다.
+// 내 위 부모에다가 class on을 뿥인다.
+
+
+const T_RIGHT = document.querySelectorAll('#footer .t_right li>a');
+const T_RIGHT_BTN = document.querySelectorAll('#footer .t_right button');
+
+console.log(T_RIGHT, T_RIGHT_BTN);
+
+T_RIGHT_BTN.forEach(it => {
+    it.addEventListener('click', () => {
+        it.closest('li').classList.remove('on');
+        //it.parentElement.parentElement.classList.remove('on')
+    })
+})
+
+const R_TAB = (it, idx) => {
+    // T_RIGHT.forEach(it => it.classList.remove('on'));
+    // it.classList.add('on');
+    // const sbr = [...T_RIGHT].filter(el => el !== it);
+    // console.log(sbr);
+
+    for (el of T_RIGHT) {
+        if (el !== it) {
+            el.parentElement.classList.remove('on')
+        }
+    }
+    //sbr.forEach(it => it.parentElement.classList.remove('on'));
+    it.parentElement.classList.toggle('on');
+}
+
+T_RIGHT.forEach((it, idx) => {
+    it.addEventListener('click', e => {
+        e.preventDefault();
+        R_TAB(it, idx)
+    });
+});
+
+
+// const [on, setOn] = useSate('')
+// {
+//     <li className={on}>
+
+//     </li>
+//     <a onClick = {()=> setOn(!on)}></a>
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

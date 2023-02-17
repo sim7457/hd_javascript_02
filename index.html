@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./css/main.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" defer></script>
+    <script src="https://www.youtube.com/iframe_api" defer></script>
     <script src="./js/main.js" defer></script>
 </head>
 
@@ -399,53 +400,114 @@
                 </div>
             </section>
 
-            <section>
-                <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-                <div id="player"></div>
+            <section id="mainMovie" class="sc">
+                <h2 class="tit">홍보영상</h2>
+                <p class="desc">건물 특성에 맞는 다양한 제품으로 고객의 요구를 충족시켜드립니다.</p>
 
-                <!-- <script src="https://www.youtube.com/iframe_api"></script> -->
-                <script>
-                    // 2. This code loads the IFrame Player API code asynchronously.
-                    var tag = document.createElement('script');
+                <!-- 반응형 iframe -->
+                <div class="movie_case">
+                    <div class="case">
+                        <div id="main_movie01"></div>
+                    </div>
+                    <button class="video_btn"></button>
+                </div>
+                <!-- <button id="pp">PLAY</button>
+                <button id="pp2">pause</button> -->
 
-                    tag.src = "https://www.youtube.com/iframe_api";
-                    var firstScriptTag = document.getElementsByTagName('script')[0];
-                    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+                <ul class="link">
 
-                    // 3. This function creates an <iframe> (and YouTube player)
-                    //    after the API code downloads.
-                    var player;
-                    function onYouTubeIframeAPIReady() {
-                        player = new YT.Player('player', {
-                            height: '100%',
-                            width: '100%',
-                            videoId: 'raw3Nu0_mBQ',
-                        });
-                    }
+                </ul>
+                <button id="btn_na">나오기</button>
 
-                    // 4. The API will call this function when the video player is ready.
-                    function onPlayerReady(event) {
-                        event.target.playVideo();
-                    }
 
-                    // 5. The API calls this function when the player's state changes.
-                    //    The function indicates that when playing a video (state=1),
-                    //    the player should play for six seconds and then stop.
-                    var done = false;
-                    function onPlayerStateChange(event) {
-                        if (event.data == YT.PlayerState.PLAYING && !done) {
-                            setTimeout(stopVideo, 6000);
-                            done = true;
-                        }
-                    }
-                    function stopVideo() {
-                        player.stopVideo();
-                    }
-                </script>
             </section>
-
+            <section id="mainNews" class="sc">
+                <h2 class="tit">현대엘리베이터 소식</h2>
+                <p class="desc">현대엘리베이터의 새소식을 전해드립니다.</p>
+                <div class="inner">
+                    <figure>
+                        <a href="#!">
+                            <img src="./img/news01.jpg" alt="">
+                            <span>보도자료</span>
+                            <strong>미래의 엘리베이터 디자인은? 현대엘리베이터 국제 아이디어 공모전 성료</strong>
+                            <em>2022.11.30</em>
+                        </a>
+                    </figure>
+                    <figure>
+                        <a href="#!">
+                            <img src="./img/news02.jpg" alt="">
+                            <span>보도자료</span>
+                            <strong>미래의 엘리베이터 디자인은? </strong>
+                            <em>2022.11.30</em>
+                        </a>
+                    </figure>
+                    <figure>
+                        <a href="#!">
+                            <img src="./img/news03.jpg" alt="">
+                            <span>보도자료</span>
+                            <strong>미래의 엘리베이터 디자인은? 현대엘리베이터 국제 아이디어 공모전 성료</strong>
+                            <em>2022.11.30</em>
+                        </a>
+                    </figure>
+                </div>
+            </section>
         </main>
-        <footer id="footer"></footer>
+        <footer id="footer">
+            <div class="f_top">
+                <div class="inner">
+                    <ul class="t_left">
+                        <li><a href="">개인정보처리방침</a></li>
+                        <li><a href="">윤리경영 사이버신문고</a></li>
+                        <li><a href="">현대 고객케어센터 1577-0603</a></li>
+                    </ul>
+                    <ul class="t_right">
+                        <li>
+                            <a href="">증명서 발급조회</a>
+                            <div class="link">
+                                <dl>
+                                    <dt><a href="">01증명서 발급조회</a></dt>
+                                    <dd><a href="">증명서 발급조회</a></dd>
+                                </dl>
+                                <button>X</button>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="">인트라넷</a>
+                            <div class="link">
+                                <dl>
+                                    <dt><a href="">02증명서 발급조회</a></dt>
+                                    <dd><a href="">증명서 발급조회</a></dd>
+                                </dl>
+                                <button>X</button>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="">패밀리사이트</a>
+                            <div class="link">
+                                <dl>
+                                    <dt><a href="">03증명서 발급조회</a></dt>
+                                    <dd><a href="">증명서 발급조회</a></dd>
+                                </dl>
+                                <button>X</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="f_bottom">
+                <div class="inner">
+                    <address>
+                        dsdsdsd
+                    </address>
+                    <ul class="sns">
+                        <li><a href=""><i>01</i></a></li>
+                        <li><a href=""><i>02</i></a></li>
+                        <li><a href=""><i>03</i></a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </footer>
     </div>
 </body>
 
